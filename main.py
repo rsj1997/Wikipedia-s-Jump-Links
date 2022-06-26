@@ -33,7 +33,6 @@ def find(url1, url2, limit):
             continue
         if url_1 == url2 or find == 1:
             find = 1
-
             break
         else:
             url_visited.append(url_1)
@@ -44,7 +43,6 @@ def find(url1, url2, limit):
                     continue
                 if url_2 == url2 or find == 1:
                     find = 1
-
                     break
                 else:
                     url_visited.append(url_2)
@@ -55,7 +53,6 @@ def find(url1, url2, limit):
                             continue
                         if url_3 == url2 or find == 1:
                             find = 1
-
                             break
                         else:
                             url_visited.append(url_3)
@@ -66,7 +63,6 @@ def find(url1, url2, limit):
                                     continue
                                 if url_4 == url2 or find == 1:
                                     find = 1
-
                                     break
                                 else:
                                     url_visited.append(url_4)
@@ -77,7 +73,6 @@ def find(url1, url2, limit):
                                             continue
                                         if url_5 == url2 or find == 1:
                                             find = 1
-
                                             break
                                         else:
                                             url_visited.append(url_5)
