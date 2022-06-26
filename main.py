@@ -88,7 +88,7 @@ def find(url1, url2, limit):
                                                     url_path[6] = url_6
                                                     break
         if url_path[6] != url2:
-            del url_path[int((url_path.index(url2)):7)]
+            del url_path[int(url_path.index(url2)):7]
     return url_path
 
 '''
