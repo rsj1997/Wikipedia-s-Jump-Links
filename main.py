@@ -5,7 +5,7 @@ import time
 
 
 def get_url(url, limit):
-    time.sleep(limit/100)
+    time.sleep(limit / 100)
     # print(url)
     res = requests.get(url)
     soup = bs4.BeautifulSoup(res.text, 'lxml')
@@ -26,13 +26,13 @@ def find(url1, url2, limit):
     url_list_6 = []
     url_visited = [url1]
     url_path = [url1, '', '', '', '', '', '']
-    find = 0
+    find_sing = 0
     url_list_1.extend(get_url(url1, 1))
     for url_1 in url_list_1:
         if url_1 in url_visited:
             continue
-        if url_1 == url2 or find == 1:
-            find = 1
+        if url_1 == url2 or find_sing == 1:
+            find_sing = 1
             break
         else:
             url_visited.append(url_1)
@@ -41,8 +41,8 @@ def find(url1, url2, limit):
             for url_2 in url_list_2:
                 if url_2 in url_visited:
                     continue
-                if url_2 == url2 or find == 1:
-                    find = 1
+                if url_2 == url2 or find_sing == 1:
+                    find_sing = 1
                     break
                 else:
                     url_visited.append(url_2)
@@ -51,8 +51,8 @@ def find(url1, url2, limit):
                     for url_3 in url_list_3:
                         if url_3 in url_visited:
                             continue
-                        if url_3 == url2 or find == 1:
-                            find = 1
+                        if url_3 == url2 or find_sing == 1:
+                            find_sing = 1
                             break
                         else:
                             url_visited.append(url_3)
@@ -61,8 +61,8 @@ def find(url1, url2, limit):
                             for url_4 in url_list_4:
                                 if url_4 in url_visited:
                                     continue
-                                if url_4 == url2 or find == 1:
-                                    find = 1
+                                if url_4 == url2 or find_sing == 1:
+                                    find_sing = 1
                                     break
                                 else:
                                     url_visited.append(url_4)
@@ -71,8 +71,8 @@ def find(url1, url2, limit):
                                     for url_5 in url_list_5:
                                         if url_5 in url_visited:
                                             continue
-                                        if url_5 == url2 or find == 1:
-                                            find = 1
+                                        if url_5 == url2 or find_sing == 1:
+                                            find_sing = 1
                                             break
                                         else:
                                             url_visited.append(url_5)
@@ -83,28 +83,39 @@ def find(url1, url2, limit):
                                                     continue
                                                 else:
                                                     url_visited.append(url_6)
-                                                if url_6 == url2 or find == 1:
-                                                    find = 1
+                                                if url_6 == url2 or find_sing == 1:
+                                                    find_sing = 1
                                                     url_path[6] = url_6
                                                     break
+    if find_sing == 1:
         if url_path[6] != url2:
-            del url_path[int(url_path.index(url2)):7]
+            del url_path[int(url_path.index(url2)) + 1:7]
+    else:
+        url_path.clear()
     return url_path
 
+
 '''
+INPUT:
 https://en.wikipedia.org/wiki/Six_degrees_of_separation
 https://en.wikipedia.org/wiki/American_Broadcasting_Company
 10
+
+*****Note*****
+Depending on your computer configuration and network environment, 
+you may need to wait 10-30 seconds for the result.
 '''
 if __name__ == "__main__":
     url1 = input()
     url2 = input()
-    limit=input()
-    url_list = []
-    url_list.extend(find(url1, url2, limit))
-
-    for i in range(0, len(url_list)):
-        if i < len(url_list) - 1:
-            print(url_list[i] + ' --> ', end='')
-        else:
-            print(url_list[i])
+    limit = input()
+    path_list = []
+    path_list.extend(find(url1, url2, limit))
+    if len(path_list) == 0:
+        print("NOT FIND!")
+    else:
+        for i in range(0, len(path_list)):
+            if i < len(path_list) - 1:
+                print(path_list[i] + ' --> ', end='')
+            else:
+                print(path_list[i])
